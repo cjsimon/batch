@@ -1,7 +1,10 @@
 @ECHO OFF
 
+:: Kill Explorer
 PSKILL EXPLORER
 
+:: Keep looping until explorer is not running
+:: @see http://stackoverflow.com/a/8185270/2104168
 :LOOP1
 PSLIST EXPLORER >nul 2>&1
 IF ERRORLEVEL 1 (
@@ -12,10 +15,14 @@ IF ERRORLEVEL 1 (
   GOTO LOOP1
 )
 
+:: Now that explorer isn't running, 
+:: delete the icon IconCache and start explorer again
 :CONTINUE1
-DEL C:\Users\csimon\AppData\Local\IconCache.db
+DEL %APPDATA%\Local\IconCache.db
 START EXPLORER
 
+:: Wait for explorer to start back
+:: up again before ending the script
 :LOOP2
 PSLIST EXPLORER >nul 2>&1
 IF ERRORLEVEL 1 (
@@ -23,4 +30,4 @@ IF ERRORLEVEL 1 (
   SLEEP 1
   GOTO LOOP2
 )
-EXIT
+EXIT /B
