@@ -1,0 +1,26 @@
+@ECHO OFF
+
+PSKILL EXPLORER
+
+:LOOP1
+PSLIST EXPLORER >nul 2>&1
+IF ERRORLEVEL 1 (
+  GOTO CONTINUE1
+) ELSE (
+  ECHO Explorer is still running
+  SLEEP 1
+  GOTO LOOP1
+)
+
+:CONTINUE1
+DEL C:\Users\csimon\AppData\Local\IconCache.db
+START EXPLORER
+
+:LOOP2
+PSLIST EXPLORER >nul 2>&1
+IF ERRORLEVEL 1 (
+  ECHO Explorer is not running
+  SLEEP 1
+  GOTO LOOP2
+)
+EXIT
