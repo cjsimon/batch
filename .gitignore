@@ -1,0 +1,9 @@
+## Ignore sublime text project files
+*.sublime-project
+*.sublime-workspace
+
+## "Other" directory
+[Oo]ther
+
+## desktop.ini
+desktop.ini
